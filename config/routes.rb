@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
-  devise_for :admin, skip: [:registrations, :password], controllers: {
-    sessions: "admin/sessions"
+  devise_for :admin, skip: [:registration, :password], controllers: {
+    sessions: "admins/sessions"
   }
 
   devise_for :user, skip: [:password], controllers: {
-    registrations: "user/registrations",
-    sessions: "user/sessions"
+    registrations: "users/registrations",
+    sessions: "users/sessions"
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
