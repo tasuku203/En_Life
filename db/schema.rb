@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_05_091819) do
+ActiveRecord::Schema.define(version: 2022_10_10_095637) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_091819) do
     t.string "profile_image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "genre"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
