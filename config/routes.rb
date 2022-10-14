@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
 # ファイル構成は指定し、urlは変えたくないのでmoduleを使用
  scope module: :users do
-  # 通常の指定方法　
+  # 通常の指定方法
   # メソッド(get) "url", to: "controller#action", as: "パス名指定"
    get "/", to: "homes#top", as: "root"
    get "/about", to: "homes#about"
@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     # usersにネストさせることでuser_id/postsというように特定のuserのindexとshowにすることができる
      resources :posts, only: [:index, :show]
    end
-   resources :posts, only:[:new, :create, :destroy]
+   resources :posts, only:[:new, :create, :destroy] do
+    resources :comments, only:[:new, :create, :index]
+    resources :likes, only:[:create, :destroy]
+   end
  end
 end
