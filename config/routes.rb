@@ -27,9 +27,9 @@ Rails.application.routes.draw do
        get :follower
      end
     # usersにネストさせることでuser_id/postsというように特定のuserのindexとshowにすることができる
-     resources :posts, only: [:index, :show]
+     # resources :posts, only: [:index, :show]
    end
-   resources :posts, only:[:new, :create, :destroy] do
+   resources :posts, only:[:new, :create, :destroy, :index, :show] do
     resources :comments, only:[:new, :create, :index]
     resources :likes, only:[:create, :destroy]
    end
