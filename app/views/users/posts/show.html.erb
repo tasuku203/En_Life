@@ -6,4 +6,4 @@
 <%= attachment_image_tag @post, :post_image %>
 
 
-<%= link_to "この投稿を削除する", confirm_post_path(post.id) %>
+<%= link_to "この投稿を削除する", confirm_post_path(@post.id) %>
