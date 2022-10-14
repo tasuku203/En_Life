@@ -1,6 +1,6 @@
 class Users::PostsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @post = Post.new
   end
@@ -8,10 +8,11 @@ class Users::PostsController < ApplicationController
   def create
     # dataを新規登録するためのインスタンス作成
     post = Post.new(post_params)
+    #
     post.user_id = current_user.id
     # dataをdataベースに保存するためのsaveメソッドを実行
     post.save
-    redirect_to posts_path(post.id)
+    redirect_to posts_path
   end
 
   def index

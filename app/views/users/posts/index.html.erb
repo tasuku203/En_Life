@@ -1,6 +1,14 @@
 <h1>投稿一覧</h1>
 <% @posts.each do |post| %>
+  <p>ユーザー名:<%= post.user.name %></p>
+
   <p>タイトル</p>
-  <%= post.title %>
+  <%= link_to post_path(post.id) do %>
+    <%= post.title %>
+  <% end %>
+  <p>投稿本文</p>
+  <%= post.body %>
+  <p>投稿画像</p>
+  <%= attachment_image_tag post, :post_image %>
 <% end %>
 

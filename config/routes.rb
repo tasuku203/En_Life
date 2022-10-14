@@ -30,6 +30,9 @@ Rails.application.routes.draw do
      # resources :posts, only: [:index, :show]
    end
    resources :posts, only:[:new, :create, :destroy, :index, :show] do
+    member do
+     get :confirm
+    end
     resources :comments, only:[:new, :create, :index]
     resources :likes, only:[:create, :destroy]
    end
