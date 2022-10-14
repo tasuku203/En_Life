@@ -1,5 +1,7 @@
 
 <h1>会員詳細ページ</h1>
-<p>ユーザー名</p>:<%= @user.name %>
+<p>ユーザー名:<%= @user.name %></p>
 
 <%= link_to "プロフィール編集", edit_user_path(current_user.id) %>
+<p>すべての投稿:<%= link_to "すべての投稿",posts_path %></p>
+

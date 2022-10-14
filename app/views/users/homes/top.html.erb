@@ -1,1 +1,8 @@
 <h1>タイムラインです</h1>
+
+<% @posts.each do |post| %>
+  <%= link_to post_path(post.id) do %>
+    <%= post.user.name %>
+    <%= post.title %>
+  <% end %>
+<% end %>
