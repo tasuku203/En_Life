@@ -34,7 +34,7 @@ Rails.application.routes.draw do
      get :confirm
      get :index_user
     end
-    resources :comments, only:[:new, :create, :index]
+    resources :comments, only:[:create, :destroy]
     resources :likes, only:[:create, :destroy]
    end
  end

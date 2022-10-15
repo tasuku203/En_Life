@@ -4,6 +4,26 @@
 <%= @post.title %>
 <%= @post.body %>
 <%= attachment_image_tag @post, :post_image %>
+<!--ログイン中のユーザーの投稿のみ削除ボタンをつくる-->
+<% if @post.user == current_user %>
+  <%= link_to "この投稿を削除する", confirm_post_path(@post.id) %>
+<% end %>
 
-
-<%= link_to "この投稿を削除する", confirm_post_path(@post.id) %>
+<div>
+  <!--countメソッドでコメント件数を表示-->
+  <p>コメント件数:<%= @post.comments.count %></p>
+  <!--コメントを表示-->
+  <% @post.comments.each do |comment|%>
+    ユーザーネーム:<%= comment.user.name %>
+    <%= comment.created_at.strftime("%Y%m%d") %></br>
+    <%= comment.body %>
+  <% end %>
+</div>
+<div>
+  <!--コメント入力フォーム作成-->
+  <!--form_withと()の間にスペースをいれるとエラーがでる-->
+  <%= form_with(model: [@post, @comment], local:true) do |f| %>
+    <%= f.text_field :body %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
