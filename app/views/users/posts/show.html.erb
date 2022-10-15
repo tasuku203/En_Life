@@ -1,6 +1,7 @@
 <h1>投稿詳細</h1>
-<p>ユーザー名:<%= @post.user.name %></p>
-<p>投稿</p>
+<!--投稿内容-->
+<div>
+  <p>ユーザー名:<%= @post.user.name %></p>
 <%= @post.title %>
 <%= @post.body %>
 <%= attachment_image_tag @post, :post_image %>
@@ -8,15 +9,34 @@
 <% if @post.user == current_user %>
   <%= link_to "この投稿を削除する", confirm_post_path(@post.id) %>
 <% end %>
-
+</div>
+<!--いいね機能-->
+<div>
+  <!--投稿がcurrent_userにすでに登録されているかされていないかの分岐-->
+  <% if @post.liked_by?(current_user) %>
+    <%= link_to post_likes_path(@post), method: :delete  do %>
+      ♥<%= @post.likes.count %>件
+    <% end %>
+  <% else %>
+    <%= link_to post_likes_path(@post), method: :post do %>
+      ♡<%= @post.likes.count %>件
+    <% end %>
+  <% end %>
+</div>
+<!--コメント機能-->
 <div>
   <!--countメソッドでコメント件数を表示-->
   <p>コメント件数:<%= @post.comments.count %></p>
-  <!--コメントを表示-->
+  <!--この投稿にされたすべてのコメントを表示-->
   <% @post.comments.each do |comment|%>
     ユーザーネーム:<%= comment.user.name %>
     <%= comment.created_at.strftime("%Y%m%d") %></br>
     <%= comment.body %>
+    <!--comment.user_id == current_userの記述ではリンクは表示されなかった-->
+    <% if comment.user == current_user %>
+    <!--パスの()内について、comment.post.idはこのコメントに紐づくpostのid。comment.idコメントのid。urlにはこの2つのidが必要になるからです。-->
+      <%= link_to "コメント削除",post_comment_path(comment.post, comment), method: :delete %></br>
+    <% end %>
   <% end %>
 </div>
 <div>

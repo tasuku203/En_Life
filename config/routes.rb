@@ -35,7 +35,10 @@ Rails.application.routes.draw do
      get :index_user
     end
     resources :comments, only:[:create, :destroy]
-    resources :likes, only:[:create, :destroy]
+    # resource,resourcesのどちらでも実装できた。
+    # favoritesのshowページが不要で、idの受け渡しも必要ないので、resourceとなっています。
+    # とdmmには書いてあった。
+    resource :likes, only:[:create, :destroy]
    end
  end
 end
