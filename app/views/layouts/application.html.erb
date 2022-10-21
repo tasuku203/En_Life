@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+s
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -15,6 +15,7 @@
       <%= link_to "タイムライン", root_path %>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <%= link_to "投稿する", new_post_path %>
+      <%= link_to "マイページ", user_path(current_user) %>
     <% else %>
       <%= link_to "新規登録", new_user_registration_path %>
       <%= link_to "ログイン", new_user_session_path %>

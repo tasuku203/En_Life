@@ -1,10 +1,36 @@
+<% if current_user == @user %>
+    <h1>会員詳細ページ</h1>
+    <p>ユーザー名:<%= @user.name %></p>
+    <!--マイページの時のみプロフィール編集できるようにする-->
+    <!--@user.id == current_user ではリンクが作成されなかった。.idはいれてはいけないようだ-->
+        <p><%= link_to "プロフィール編集", edit_user_path(current_user.id) %></br></p>
+        <p><%= link_to "すべての投稿",index_user_post_path(@user.id) %></p>
+        <p><%= link_to "いいねした投稿", like_user_path(@user.id) %></p></br>
+        <p>following</p></br>
+        <p>follower</p>
+        <p>退会する</p>
+<% else %>
+  <h1>会員詳細</h1>
+    <p>ユーザー名:<%= @user.name %></p>
+    <!--フォローボタン作成-->
+    <% unless current_user == @user %>
+      <% if current_user.following?(@user)%>
+        <%= form_with model:@relationship, url:relationship_path, method: :delete, local: true do |f| %>
+          <%= f.hidden_field :followed_id, value: @user.id %>
+          <%= f.submit "フォローを解除する" %>
+        <% end %>
+      <% else %>
+        <%= form_with model:@set_relationship, url:relationships_path, method: :post, local:true do |f|%>
+          <%= f.hidden_field :followed_id, value: @user.id %>
+          <%= f.submit "フォローする" %>
+        <% end %>
+      <% end %>
+    <% end %>
 
-<h1>会員詳細ページ</h1>
-<p>ユーザー名:<%= @user.name %></p>
+　　 <p><%= link_to "すべての投稿",index_user_post_path(@user.id) %></p>
+    <p><%= link_to "いいねした投稿", like_user_path(@user.id) %></p></br>
+    <p><%= link_to "フォロー", following_user_path(@user.id) %></p></br>
+    <p>follower</p>
+<% end %>
 
-<%= link_to "プロフィール編集", edit_user_path(current_user.id) %></br>
-<p>すべての投稿:<%= link_to "すべての投稿",index_user_post_path(@user.id) %></p>
-<p>いいねした投稿</p></br>
-<p>following</p></br>
-<p>follower</p>
 

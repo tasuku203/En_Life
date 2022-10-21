@@ -40,5 +40,6 @@ Rails.application.routes.draw do
     # とdmmには書いてあった。
     resource :likes, only:[:create, :destroy]
    end
+   resources :relationships, only:[:create, :destroy]
  end
 end
