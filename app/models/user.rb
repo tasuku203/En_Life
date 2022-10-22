@@ -29,11 +29,17 @@ class User < ApplicationRecord
     relationship = self.active_relationships.find_by(followed_id: other_user.id)
     relationship.destroy if relationship
   end
-  
+
   # 検索で使うsearchメソッドを定義
   def self.search(keyword)
     where(["name like?", "%#{keyword}%"])
   end
-    
+
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲスト"
+    end
+  end
 
 end

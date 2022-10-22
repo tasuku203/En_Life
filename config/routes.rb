@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
+  devise_scope :user do
+   post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 # ファイル構成は指定し、urlは変えたくないのでmoduleを使用
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
   # メソッド(get) "url", to: "controller#action", as: "パス名指定"
    get "/", to: "homes#top", as: "root"
    get "/about", to: "homes#about"
+   # post "/guest_sign_in", to: "homes#guest_sign_in"
   # resourcesメソッド [index,create,new,show,update,edit,destroy]を自動で作成
   # onlyを使うことで不要なルーティングを制限
    resources :users, only:[:show, :edit, :update, :destroy, :index] do
@@ -26,7 +30,7 @@ Rails.application.routes.draw do
        get :following
        get :follower
      end
-     collection do 
+     collection do
       get :search
      end
     # usersにネストさせることでuser_id/postsというように特定のuserのindexとshowにすることができる
