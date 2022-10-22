@@ -18,13 +18,16 @@ Rails.application.routes.draw do
    get "/about", to: "homes#about"
   # resourcesメソッド [index,create,new,show,update,edit,destroy]を自動で作成
   # onlyを使うことで不要なルーティングを制限
-   resources :users, only:[:show, :edit, :update, :destroy] do
+   resources :users, only:[:show, :edit, :update, :destroy, :index] do
     # member　で自分でアクションを作ることが出来る。　collectionとの違いはurlにidを指定するかしないか
      member do
        get :confirm
        get :like
        get :following
        get :follower
+     end
+     collection do 
+      get :search
      end
     # usersにネストさせることでuser_id/postsというように特定のuserのindexとshowにすることができる
      # resources :posts, only: [:index, :show]

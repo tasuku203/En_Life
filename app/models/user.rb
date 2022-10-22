@@ -29,5 +29,11 @@ class User < ApplicationRecord
     relationship = self.active_relationships.find_by(followed_id: other_user.id)
     relationship.destroy if relationship
   end
+  
+  # 検索で使うsearchメソッドを定義
+  def self.search(keyword)
+    where(["name like?", "%#{keyword}%"])
+  end
+    
 
 end

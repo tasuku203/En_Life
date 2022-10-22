@@ -1,12 +1,17 @@
 class Users::UsersController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: [:index, :search]
+
+  def index
+    @users = User.all
+  end
+
   def show
     @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
     @set_relationship = current_user.active_relationships.new
   end
 
   def edit
-    
+
   end
 
   def update
@@ -30,6 +35,13 @@ class Users::UsersController < ApplicationController
   def follower
     @users = @user.followers
   end
+
+  def search
+    @users = User.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+  end
+
 
   private
 
