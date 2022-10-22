@@ -10,4 +10,8 @@ class Post < ApplicationRecord
     likes.where(user_id: user.id).exists?
   end
     
+    
+  def self.search(keyword)
+    where(["title like? or body like?", "%#{keyword}%", "%#{keyword}%"])
+  end
 end

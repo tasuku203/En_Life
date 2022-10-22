@@ -29,10 +29,13 @@ Rails.application.routes.draw do
     # usersにネストさせることでuser_id/postsというように特定のuserのindexとshowにすることができる
      # resources :posts, only: [:index, :show]
    end
-   resources :posts, only:[:new, :create, :destroy, :show] do
+   resources :posts, only:[:new, :create, :destroy, :show, :index] do
     member do
      get :confirm
      get :index_user
+    end
+    collection do
+     get :search
     end
     resources :comments, only:[:create, :destroy]
     # resource,resourcesのどちらでも実装できた。

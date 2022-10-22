@@ -1,0 +1,4 @@
+<h1>いいねした投稿一覧</h1>
+<% @like_posts.each do |like|%>
+  <%= like.user.name %>
+<% end %>

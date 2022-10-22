@@ -1,13 +1,13 @@
 <% if current_user == @user %>
-    <h1>会員詳細ページ</h1>
+    <h1>マイページ</h1>
     <p>ユーザー名:<%= @user.name %></p>
     <!--マイページの時のみプロフィール編集できるようにする-->
     <!--@user.id == current_user ではリンクが作成されなかった。.idはいれてはいけないようだ-->
         <p><%= link_to "プロフィール編集", edit_user_path(current_user.id) %></br></p>
-        <p><%= link_to "すべての投稿",index_user_post_path(@user.id) %></p>
-        <p><%= link_to "いいねした投稿", like_user_path(@user.id) %></p></br>
-        <p>following</p></br>
-        <p>follower</p>
+        <p><%= link_to "すべての投稿",index_user_post_path(current_user.id) %></p>
+        <p><%= link_to "いいねした投稿", like_user_path(current_user.id) %></p></br>
+        <p><%= link_to "フォロー一覧", following_user_path(current_user.id) %></p></br>
+        <p><%= link_to "フォロワー一覧", follower_user_path(current_user.id) %></p>
         <p>退会する</p>
 <% else %>
   <h1>会員詳細</h1>
@@ -26,11 +26,10 @@
         <% end %>
       <% end %>
     <% end %>
-
-　　 <p><%= link_to "すべての投稿",index_user_post_path(@user.id) %></p>
+    <p><%= link_to "すべての投稿",index_user_post_path(@user.id) %></p>
     <p><%= link_to "いいねした投稿", like_user_path(@user.id) %></p></br>
-    <p><%= link_to "フォロー", following_user_path(@user.id) %></p></br>
-    <p>follower</p>
+    <p><%= link_to "フォロー一覧", following_user_path(@user.id) %></p></br>
+    <p><%= link_to "フォロワー一覧", follower_user_path(@user.id) %></p>
 <% end %>
 
 

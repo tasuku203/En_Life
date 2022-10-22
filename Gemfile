@@ -64,4 +64,5 @@ gem "refile", require: "refile/rails", github: "manfe/refile"
 gem "refile-mini_magick"
 # デバッグツール　binding.pry
 gem "pry-rails"
+gem "ransack"
 

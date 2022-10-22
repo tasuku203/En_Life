@@ -39,6 +39,17 @@ class Users::PostsController < ApplicationController
     redirect_to index_user_post_path(@post.user)
   end
 
+  def index
+    @posts = Post.all
+  end
+
+  def search
+    @posts = Post.search(params[:keyword])
+    @keyword = params[:keyword]
+    render "index"
+
+  end
+
   private
 
   def post_params
