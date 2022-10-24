@@ -1,8 +1,19 @@
-<h1>タイムライン</h1>
-<%= flash[:guest_success] %></br>
+<%= flash[:guest_success] %>
+
+<div class= "container" >
+  <div class= "row justify-content-md-center">
+    <div class= "col">
+      <h1>タイムライン</h1>
+    </div>
+  </div>
+</div>
+
+
+
+
 <% @posts.each do |post| %>
   <%= link_to user_path(post.user.id) do %>
-    ユーザーネーム<%= post.user.name %></br>
+    <%= post.user.name %></br>
   <% end %>
   <%= link_to post_path(post.id) do %>
     <%= post.title %></br>

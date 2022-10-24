@@ -1,6 +1,15 @@
 <% if current_user == @user %>
-    <h1>マイページ</h1>
+<div class="container">
+  <div class="row">
+    <div class="col">
+     <h1>マイページ</h1>
+    </div>
+    <div class="col">
+      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100 %>
     <p>ユーザー名:<%= @user.name %></p>
+    <p>自己紹介:<%= @user.profile %></p>
+    </div>
+  </div>
     <!--マイページの時のみプロフィール編集できるようにする-->
     <!--@user.id == current_user ではリンクが作成されなかった。.idはいれてはいけないようだ-->
         <p><%= link_to "プロフィール編集", edit_user_path(current_user.id) %></br></p>
@@ -9,6 +18,7 @@
         <p><%= link_to "フォロー一覧", following_user_path(current_user.id) %></p></br>
         <p><%= link_to "フォロワー一覧", follower_user_path(current_user.id) %></p>
         <p>退会する</p>
+</div>
 <% else %>
   <h1>会員詳細</h1>
     <p>ユーザー名:<%= @user.name %></p>

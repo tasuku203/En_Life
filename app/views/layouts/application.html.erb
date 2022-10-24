@@ -2,32 +2,80 @@
 <html>
   <head>
     <title>EnLife</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-s
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= notice %>
-    <%= alert %>
-    <% if user_signed_in?%>
-      <%= link_to "タイムライン", root_path %>
-      <%= link_to "投稿一覧", posts_path %>
-      <%= link_to "会員一覧", users_path %>
-      <%= link_to "投稿する", new_post_path %>
-      <%= link_to "マイページ", user_path(current_user) %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "トップページ", about_path %>
-      <%= link_to "タイムライン", root_path %>
-      <%= link_to "投稿一覧", posts_path %>
-      <%= link_to "会員一覧", users_path %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
-    <%= yield %>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <%= notice %>
+      <%= alert %>
+      <nav class="nav navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+           <a class="navbar-brand" href="/about">En_Life</a>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarNavDropdown">
+             <ul class="navbar-nav ml-auto">
+             <% if user_signed_in? %>
+               <li class="nav-item">
+                <%= link_to "Home", root_path, class: "nav-link"%>
+               </li>
+               <li class="nav=item">
+                <%= link_to "投稿一覧", posts_path, class: "nav-link"%>
+               </li>
+               <li>
+                 <%= link_to "会員一覧", users_path, class: "nav-link" %>
+               </li>
+               <li>
+                 <%= link_to "新規投稿", new_post_path, class: "nav-link"%>
+               </li>
+               <li>
+                 <%= link_to "マイページ", user_path(current_user), class: "nav-link" %>
+               </li>
+               <li>
+                 <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link"%>
+              </li>
+             <% elsif admin_signed_in? %>
+               <li>
+                <%= link_to "会員一覧", admins_users_path, class: "nav-link" %>
+               </li>
+               <li>
+                <%= link_to "投稿一覧", admins_users_path_posts_path, class: "nav-link" %>
+               </li>
+               <li>
+                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+               </li>
+             <% else %>
+               <li>
+                <%= link_to "トップページ", about_path, class: "nav-link" %> 
+               </li>
+               <li>
+                <%= link_to "投稿一覧", posts_pathm, class: "nav-link" %>
+               </li>
+               <li>
+                  <%= link_to "会員一覧", users_path, class: "nav-link" %>
+               </li>
+               <li>
+                 <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+               </li>
+               <li>
+                 <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+               </li>
+             <% end %>
+             </ul>
+           </div>
+        </div>
+      </nav>
+    </header>
+    <main class="mt-5">
+      <%= yield %>
+    </main>
   </body>
 </html>

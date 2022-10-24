@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     member do
      get :confirm
      get :index_user
+     get :show_image
     end
     collection do
      get :search
@@ -51,5 +52,12 @@ Rails.application.routes.draw do
     resource :likes, only:[:create, :destroy]
    end
    resources :relationships, only:[:create, :destroy]
+ end
+
+ namespace :admins do
+  get "/", to: "homes#top"
+
+  resources :users, only: %i[index show edit update]
+  resources :posts, only: %i[index show destroy]
  end
 end

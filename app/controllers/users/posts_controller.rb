@@ -14,6 +14,10 @@ class Users::PostsController < ApplicationController
     post.save
     redirect_to index_user_post_path(post.user_id)
   end
+  
+  def index
+    @posts = Post.all.page(params[:page]).per(2)
+  end
 
 # 最初はindexアクションを定義していたがユーザーごとの投稿一覧ページを実装する必要があったので新しいアクションindex_userを追加して
 # urlにuser_idを含むposts/user_id/index_userというルーティングを作った。
@@ -21,12 +25,17 @@ class Users::PostsController < ApplicationController
     @user = User.find(params[:id])
      # 特定のユーザーの投稿一覧だけを取得したいのでwhereメソッドを使う
     # モデル.where(条件)
-    @posts = Post.where(user_id:params[:id])
+    @posts = Post.where(user_id:params[:id]).page(params[:page]).per(1)
   end
 
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
+  end
+  
+  # 画像の詳細（拡大）表示
+  def show_image
+    @post = Post.find(params[:id])
   end
 
   def confirm
@@ -39,9 +48,7 @@ class Users::PostsController < ApplicationController
     redirect_to index_user_post_path(@post.user)
   end
 
-  def index
-    @posts = Post.all
-  end
+  
 
   def search
     @posts = Post.search(params[:keyword])

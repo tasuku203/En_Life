@@ -1,10 +1,12 @@
 <h1>投稿詳細</h1>
 <!--投稿内容-->
 <div>
-  <p>ユーザー名:<%= @post.user.name %></p>
+  <%= link_to user_path(@post.user) do %>
+    <p>ユーザー名:<%= @post.user.name %></p>
+  <% end %>
 <%= @post.title %>
 <%= @post.body %>
-<%= attachment_image_tag @post, :post_image %>
+<%= attachment_image_tag @post, :post_image, :fill, 100, 100 %>
 <!--ログイン中のユーザーの投稿のみ削除ボタンをつくる-->
 <% if @post.user == current_user %>
   <%= link_to "この投稿を削除する", confirm_post_path(@post.id) %>

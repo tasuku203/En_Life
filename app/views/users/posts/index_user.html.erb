@@ -1,4 +1,4 @@
-<h1>投稿一覧</h1>
+<% @user.name %><h1>投稿一覧</h1>
  <p>ユーザー名:<%= @user.name %></p>
 <% @posts.each do |post| %>
   <div>タイトル</div></br>
@@ -7,6 +7,8 @@
   <% end %>
   <p>投稿本文:<%= post.body %></p>
   <p>投稿画像</p>
-  <%= attachment_image_tag post, :post_image %>
+  <%= attachment_image_tag post, :post_image, :fill, 400, 400 %>
   <%= post.comments.count%>件
 <% end %>
+
+<%= paginate @posts %>

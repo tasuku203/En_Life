@@ -7,14 +7,17 @@ class Users::UsersController < ApplicationController
 
   def show
     @relationship = current_user.active_relationships.find_by(followed_id: @user.id)
+
     @set_relationship = current_user.active_relationships.new
   end
 
   def edit
-
   end
 
   def update
+    @user.update(user_params)
+    redirect_to user_path(current_user)
+      
   end
 
   def confirm
@@ -47,6 +50,10 @@ class Users::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :name, :profile, :profile_image)
   end
 
 end
