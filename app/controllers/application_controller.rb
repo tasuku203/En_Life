@@ -9,11 +9,21 @@ before_action :configure_permitted_parameters, if: :devise_controller?
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :profile_image])
   end
 
+  def after_sign_up_path_for(resource)
+    user_path(current_user)
+  end
+
+  def after_sign_in_path_for(resource)
+    if resource == :user
+      user_path(current_user)
+    end
+  end
+
   def after_sign_out_path_for(resource)
     if resource == :user
       about_path
     elsif resource == :admin
-      new_admin_seccion_path
+      new_admin_session_path
     end
   end
 end

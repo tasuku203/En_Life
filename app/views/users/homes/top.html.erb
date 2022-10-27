@@ -6,16 +6,13 @@
       <h1>タイムライン</h1>
     </div>
   </div>
+  <div class="row">
+    <% if current_user.followings.count == 0 %>
+      <%= render 'users/posts/list', posts:@posts_all %>
+    <% else %>
+      <%= render 'users/posts/list', posts:@posts %>
+    <% end %>
+  </div>
 </div>
 
 
-
-
-<% @posts.each do |post| %>
-  <%= link_to user_path(post.user.id) do %>
-    <%= post.user.name %></br>
-  <% end %>
-  <%= link_to post_path(post.id) do %>
-    <%= post.title %></br>
-  <% end %>
-<% end %>

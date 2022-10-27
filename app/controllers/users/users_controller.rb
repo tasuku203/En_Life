@@ -1,4 +1,5 @@
 class Users::UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_user, except: [:index, :search]
 
   def index
@@ -17,14 +18,18 @@ class Users::UsersController < ApplicationController
   def update
     @user.update(user_params)
     redirect_to user_path(current_user)
-      
+
   end
 
   def confirm
   end
 
   def destroy
+    @user.destroy
+    flash[:notice] = "ユーザーを削除しました"
+    redirect_to about_path
   end
+ 
 
   def like
     likes = Like.where(user_id: @user.id).pluck(:post_id)
@@ -53,7 +58,7 @@ class Users::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :name, :profile, :profile_image)
+    params.require(:user).permit(:email, :name, :profile, :profile_image, :is_active)
   end
 
 end

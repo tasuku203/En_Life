@@ -1,12 +1,39 @@
-<h1>プロフィール編集ページ</h1>
-<%= form_with model:@user, url:user_path(@user.id), local: true do |f| %>
+<div class="container">
+  <div class="row">
+    <h2>プロフィール編集ページ</h2>
+  </div>
   
-  <%= f.email_field :email %>
-  <%= f.text_field :name %>
-  <%= f.text_area :profile %>
-  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100%>
-  <%= f.attachment_field :profile_image %>
+  <div class="row justify-content-center">
+    <p>
+    <%= attachment_image_tag @user, :profile_image, :fill, 500, 500, fallback:"images/no_image.jpg",size:'200x200', class:"rounded-circle"; %>
+    </p>
+  </div>
   
-  <%= f.submit "保存する" %>
-<% end %>
+  
+  <div class="row justify-content-center">
+    <%= form_with model:@user, url:user_path(@user.id), local: true do |f| %>
+    <div class="form-group">
+      <%= f.label :email, class:"form-label" %>
+      <%= f.email_field :email, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :name, class:"form-label" %>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :profile, class:"form-label" %>
+      <%= f.text_area :profile, class:"form-control" %>
+    </div>
+    <div class="form-group">
+       <%= f.label :プロフィール画像, class: "form_label" %>
+       <%= attachment_image_tag @user, :profile_image, :fill, 100, 100%>
+       <%= f.attachment_field :profile_image %>
+    </div>
+    <div>
+       <%= f.submit "保存する" %>
+    </div>
+    <% end %>
+  </div>
+</div>
+
 

@@ -1,51 +1,69 @@
-<h1>投稿詳細</h1>
-<!--投稿内容-->
-<div>
-  <%= link_to user_path(@post.user) do %>
-    <p>ユーザー名:<%= @post.user.name %></p>
-  <% end %>
-<%= @post.title %>
-<%= @post.body %>
-<%= attachment_image_tag @post, :post_image, :fill, 100, 100 %>
-<!--ログイン中のユーザーの投稿のみ削除ボタンをつくる-->
-<% if @post.user == current_user %>
-  <%= link_to "この投稿を削除する", confirm_post_path(@post.id) %>
-<% end %>
-</div>
-<!--いいね機能-->
-<div>
-  <!--投稿がcurrent_userにすでに登録されているかされていないかの分岐-->
-  <% if @post.liked_by?(current_user) %>
-    <%= link_to post_likes_path(@post), method: :delete  do %>
-      ♥<%= @post.likes.count %>件
-    <% end %>
-  <% else %>
-    <%= link_to post_likes_path(@post), method: :post do %>
-      ♡<%= @post.likes.count %>件
-    <% end %>
-  <% end %>
-</div>
-<!--コメント機能-->
-<div>
-  <!--countメソッドでコメント件数を表示-->
-  <p>コメント件数:<%= @post.comments.count %></p>
-  <!--この投稿にされたすべてのコメントを表示-->
-  <% @post.comments.each do |comment|%>
-    ユーザーネーム:<%= comment.user.name %>
-    <%= comment.created_at.strftime("%Y%m%d") %></br>
-    <%= comment.body %>
-    <!--comment.user_id == current_userの記述ではリンクは表示されなかった-->
-    <% if comment.user == current_user %>
-    <!--パスの()内について、comment.post.idはこのコメントに紐づくpostのid。comment.idコメントのid。urlにはこの2つのidが必要になるからです。-->
-      <%= link_to "コメント削除",post_comment_path(comment.post, comment), method: :delete %></br>
-    <% end %>
-  <% end %>
-</div>
-<div>
-  <!--コメント入力フォーム作成-->
+<div class="container px-4 px-sm-0">
+  <div class="row">
+    <%= render 'users/users/list', user:@user %>
+    
+    <div class="col-md-8">
+      <h2>投稿詳細</h2>
+      <!--カード開始-->
+      <div class="card w-50 mx-auto mt-4 mb-1 shadow-lg">
+      <%= attachment_image_tag @post, :post_image, class: "card-img-top"%>
+        <div class="card-body">
+          <div class="row">
+            <%= @post.title %>
+          </div>
+          <div class="row">
+            <%= @post.body %>
+          </div>
+          <div class="row">
+            <div class="col-4">
+            <!--いいねボタン-->
+            <% if @post.liked_by?(current_user) %>
+              <%= link_to post_likes_path(@post), method: :delete  do %>
+                ♥<%= @post.likes.count %>件
+              <% end %>
+            <% else %>
+              <%= link_to post_likes_path(@post), method: :post do %>
+                ♡<%= @post.likes.count %>件
+              <% end %>
+            <% end %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <!--コメントマーク-->
+              <p>
+              <% if @post.commented_by?(current_user) %>
+                <span><i class="fas fa-comment"></i><%= @post.comments.count %> | </span>
+              <% else %>
+                <span><i class="far fa-comment"></i><%= @post.comments.count %> | </span>
+              <% end %>
+              </p>
+              <!--この投稿にされたすべてのコメントを表示-->
+              <% @post.comments.each do |comment|%>
+                ユーザーネーム:<%= comment.user.name %>
+                <%= comment.created_at.strftime("%Y%m%d") %></br>
+                <%= comment.body %>
+                <!--comment.user_id == current_userの記述ではリンクは表示されなかった-->
+                <% if comment.user == current_user %>
+                <!--パスの()内について、comment.post.idはこのコメントに紐づくpostのid。comment.idコメントのid。urlにはこの2つのidが必要になるからです。-->
+                  <%= link_to "コメント削除",post_comment_path(comment.post, comment), method: :delete %></br>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--コメント入力フォーム作成-->
   <!--form_withと()の間にスペースをいれるとエラーがでる-->
-  <%= form_with(model: [@post, @comment], local:true) do |f| %>
-    <%= f.text_field :body %>
-    <%= f.submit "送信する" %>
-  <% end %>
+      <div>
+      <%= form_with(model: [@post, @comment], local:true) do |f| %>
+        <%= f.text_field :body %>
+        <%= f.submit "送信する" %>
+      <% end %>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<!--投稿内容-->

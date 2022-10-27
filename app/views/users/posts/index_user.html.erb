@@ -1,14 +1,19 @@
-<% @user.name %><h1>投稿一覧</h1>
- <p>ユーザー名:<%= @user.name %></p>
-<% @posts.each do |post| %>
-  <div>タイトル</div></br>
-  <%= link_to post_path(post.id) do %>
-    <%= post.title %>
-  <% end %>
-  <p>投稿本文:<%= post.body %></p>
-  <p>投稿画像</p>
-  <%= attachment_image_tag post, :post_image, :fill, 400, 400 %>
-  <%= post.comments.count%>件
-<% end %>
+<!--ユーザー情報-->
+<div class="container px-4 px-sm-0">
+  <div class="row">
+    <!--部分テンプレート呼び出し-->
+    <%= render 'users/users/list', user:@user %>
+    <!--メイン-->
+    <div class="col-md-8">
+      <h2><%= @user.name %>の投稿</h2>
+      <!--部分テンプレート呼び出し-->
+      <%= render 'users/posts/list', posts:@posts %>
+    </div>
+    <div class="row justify-content-center">
+      <%= paginate @posts %>
+    </div>
+  </div>
+</div>
 
-<%= paginate @posts %>
+ 
+      

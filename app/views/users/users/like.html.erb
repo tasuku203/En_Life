@@ -1,4 +1,9 @@
-<h1>いいねした投稿一覧</h1>
-<% @like_posts.each do |like|%>
-  <%= like.user.name %>
-<% end %>
+<div class="container px-4 px-sm-0">
+  <div class="row">
+    <%= render 'users/users/list', user:@user %>
+    <div class="col-md-8">
+      <h2>いいねした投稿</h2>
+      <%= render 'users/posts/list', posts:@like_posts %>
+    </div>
+  </div>
+</div>

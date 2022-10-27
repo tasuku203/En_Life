@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+      <h3>本当に退会しますか？</h3>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-3 d-flex justify-content-center">
+      <%= link_to user_path(current_user), method: :delete do %>
+      <h4>はい</h4>
+      <% end %>
+    </div>
+    <div class="col-3 d-flex justify-content-center">
+      <%= link_to user_path(current_user) do %>
+      <h4>いいえ</h4>
+      <% end %>
+    </div>
+  </div>

@@ -47,7 +47,7 @@
                 <%= link_to "会員一覧", admins_users_path, class: "nav-link" %>
                </li>
                <li>
-                <%= link_to "投稿一覧", admins_users_path_posts_path, class: "nav-link" %>
+                <%= link_to "投稿一覧", admins_posts_path, class: "nav-link" %>
                </li>
                <li>
                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
@@ -57,7 +57,7 @@
                 <%= link_to "トップページ", about_path, class: "nav-link" %> 
                </li>
                <li>
-                <%= link_to "投稿一覧", posts_pathm, class: "nav-link" %>
+                <%= link_to "投稿一覧", posts_path, class: "nav-link" %>
                </li>
                <li>
                   <%= link_to "会員一覧", users_path, class: "nav-link" %>

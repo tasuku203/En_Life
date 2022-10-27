@@ -14,9 +14,10 @@ class Users::PostsController < ApplicationController
     post.save
     redirect_to index_user_post_path(post.user_id)
   end
-  
+
   def index
-    @posts = Post.all.page(params[:page]).per(2)
+    # ページネーションを使う
+    @posts = Post.all.page(params[:page]).per(3)
   end
 
 # 最初はindexアクションを定義していたがユーザーごとの投稿一覧ページを実装する必要があったので新しいアクションindex_userを追加して
@@ -25,14 +26,15 @@ class Users::PostsController < ApplicationController
     @user = User.find(params[:id])
      # 特定のユーザーの投稿一覧だけを取得したいのでwhereメソッドを使う
     # モデル.where(条件)
-    @posts = Post.where(user_id:params[:id]).page(params[:page]).per(1)
+    @posts = Post.where(user_id:params[:id]).page(params[:page]).per(2)
   end
 
   def show
     @post = Post.find(params[:id])
+    @user = @post.user
     @comment = Comment.new
   end
-  
+
   # 画像の詳細（拡大）表示
   def show_image
     @post = Post.find(params[:id])
@@ -48,10 +50,10 @@ class Users::PostsController < ApplicationController
     redirect_to index_user_post_path(@post.user)
   end
 
-  
+
 
   def search
-    @posts = Post.search(params[:keyword])
+    @posts = Post.search(params[:keyword]).page(params[:page]).per(5)
     @keyword = params[:keyword]
     render "index"
 

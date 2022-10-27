@@ -22,13 +22,14 @@ Rails.application.routes.draw do
    # post "/guest_sign_in", to: "homes#guest_sign_in"
   # resourcesメソッド [index,create,new,show,update,edit,destroy]を自動で作成
   # onlyを使うことで不要なルーティングを制限
-   resources :users, only:[:show, :edit, :update, :destroy, :index] do
+   resources :users, only:[:show, :edit, :update, :index, :destroy] do
     # member　で自分でアクションを作ることが出来る。　collectionとの違いはurlにidを指定するかしないか
      member do
        get :confirm
        get :like
        get :following
        get :follower
+      
      end
      collection do
       get :search
@@ -57,7 +58,15 @@ Rails.application.routes.draw do
  namespace :admins do
   get "/", to: "homes#top"
 
-  resources :users, only: %i[index show edit update]
-  resources :posts, only: %i[index show destroy]
+  resources :users, only: %i[index show edit update] do
+   collection do
+    get :search
+   end
+ end
+  resources :posts, only: %i[index show destroy] do
+   collection do
+    get :search
+   end
+  end
  end
 end
