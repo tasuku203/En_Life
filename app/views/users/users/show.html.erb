@@ -1,5 +1,8 @@
 
 <div class="container">
+  <% if current_user == @user %>
+  <h3>マイページ</h3>
+  <% end %>
   <div class="row justify-content-center">
     <p>
     <%= attachment_image_tag @user, :profile_image, :fill, 500, 500, fallback:"images/no_image.jpg",size:'200x200', class:"rounded-circle"; %>
@@ -25,12 +28,12 @@
     <% if current_user.following?(@user)%>
       <%= form_with model:@relationship, url:relationship_path, method: :delete, local: true do |f| %>
         <%= f.hidden_field :followed_id, value: @user.id %>
-        <%= f.submit "unfollow" %>
+        <%= f.submit "フォローを外す" %>
       <% end %>
     <% else %>
       <%= form_with model:@set_relationship, url:relationships_path, method: :post, local:true do |f|%>
         <%= f.hidden_field :followed_id, value: @user.id %>
-        <%= f.submit "follow" %>
+        <%= f.submit "フォローする" %>
       <% end %>
     <% end %>
   </div>

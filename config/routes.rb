@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     collection do
      get :search
     end
-    resources :comments, only:[:create, :destroy]
+    resources :comments, only:[:index, :create, :destroy]
     # resource,resourcesのどちらでも実装できた。
     # favoritesのshowページが不要で、idの受け渡しも必要ないので、resourceとなっています。
     # とdmmには書いてあった。

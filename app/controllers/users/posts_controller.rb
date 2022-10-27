@@ -12,6 +12,7 @@ class Users::PostsController < ApplicationController
     post.user_id = current_user.id
     # dataをdataベースに保存するためのsaveメソッドを実行
     post.save
+    flash[:notice] = "投稿に成功しました!!"
     redirect_to index_user_post_path(post.user_id)
   end
 
@@ -26,7 +27,7 @@ class Users::PostsController < ApplicationController
     @user = User.find(params[:id])
      # 特定のユーザーの投稿一覧だけを取得したいのでwhereメソッドを使う
     # モデル.where(条件)
-    @posts = Post.where(user_id:params[:id]).page(params[:page]).per(2)
+    @posts = Post.where(user_id:params[:id]).order(created_at: :desc).page(params[:page]).per(2)
   end
 
   def show

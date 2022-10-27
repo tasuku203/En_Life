@@ -104,6 +104,10 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.11.0)
     execjs (2.8.1)
     ffi (1.15.5)
@@ -156,6 +160,7 @@ GEM
     msgpack (1.5.4)
     mustermann (1.1.2)
       ruby2_keywords (~> 0.0.1)
+    mysql2 (0.5.4)
     netrc (0.11.0)
     nio4r (2.5.8)
     nokogiri (1.13.8)
@@ -301,11 +306,13 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise
+  dotenv-rails
   font-awesome-sass (~> 5.13)
   jbuilder (~> 2.7)
   jquery-rails
   kaminari
   listen (~> 3.3)
+  mysql2
   pry-rails
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
