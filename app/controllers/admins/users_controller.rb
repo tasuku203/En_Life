@@ -18,6 +18,17 @@ class Admins::UsersController < ApplicationController
     redirect_to admins_user_path(@user)
   end
   
+  def following
+    @user = User.find(params[:id])
+    @users = @user.followings
+  end
+
+  def follower
+    @user = User.find(params[:id])
+    @users = @user.followers
+  end
+
+  
   def search
     @users = User.search(params[:keyword])
     @keyword = params[:keyword]

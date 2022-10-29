@@ -6,7 +6,7 @@
     <!--メイン-->
     <div class="col-md-8 d-flex flex-column">
       <%= flash[:notice] %>
-      <h2><%= @user.name %>の投稿</h2>
+      <h2><%= @user.name %>のすべての投稿</h2>
       <!--部分テンプレート呼び出し-->
       <%= render 'users/posts/list', posts:@posts %>
     </div>

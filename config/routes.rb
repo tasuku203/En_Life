@@ -59,6 +59,11 @@ Rails.application.routes.draw do
   get "/", to: "homes#top"
 
   resources :users, only: %i[index show edit update] do
+   member do
+    get :following
+    get :follower
+   end
+    
    collection do
     get :search
    end

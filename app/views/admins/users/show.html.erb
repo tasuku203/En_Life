@@ -13,30 +13,21 @@
   <div class="row justify-content-center">
     <p><%= @user.profile %></p>
   </div>
-  <!--編集ボタン-->
- 
-  <!--ここまで-->
- 　
   <div class="row d-flex justify-content-center">
-    <div class="col-3 d-flex justify-content-center">
-      <p><h5><%= link_to "すべての投稿",index_user_post_path(@user.id) %></h5></p>
-      <span><%= @user.posts.count %></span>
+    <div class="col-3 d-flex justify-content-center flex-column">
+      <p class="mb-0 d-flex justify-content-center"><%= @user.followers.count %></p>
+      <h5 class="d-flex justify-content-center"><%= link_to "フォロワー", follower_admins_user_path(@user) %></h5>
     </div>
-    <div class="col-3 d-flex justify-content-center">
-      <h5><%= link_to "いいねした投稿", like_user_path(@user.id) %></h5>
-      <%= @user.likes.count %>
+    <div class="col-3 d-flex justify-conten-center flex-column">
+      <p class="mb-0 d-flex justify-content-center"><%= @user.followings.count %></p>
+      <h5 class="d-flex justify-content-center"><%= link_to "フォロー", following_admins_user_path(@user) %></h5>
     </div>
   </div>
-  <div class="row d-flex justify-content-center">
-    <div class="col-3 d-flex justify-content-center">
-      <p><h5><%= link_to "following", following_user_path(@user.id) %></h5></p>
-      <span><%= @user.followings.count %></span>
-    </div>
-    <div class="col-3 d-flex justify-content-center">
-      <h5><%= link_to "follower", follower_user_path(@user.id) %></h5>
-      <%= @user.followers.count %>
-    </div>
+  <div class="row d-flex flex-column">
+      <p class="d-flex justify-content-center"><%= @user.posts.count %></p>
+      <h5 class="d-flex justify-content-center"><%= link_to "すべての投稿",index_user_post_path(@user.id) %></h5>
   </div>
+  
   <div class="row justify-content-center">
     <%= form_with model:@user, url: admins_user_path(@user),method: :patch , local: true do |f| %>
       <%= f.radio_button :is_active, true %>

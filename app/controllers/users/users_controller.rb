@@ -1,5 +1,5 @@
 class Users::UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[following, follower]
   before_action :set_user, except: [:index, :search]
 
   def index
