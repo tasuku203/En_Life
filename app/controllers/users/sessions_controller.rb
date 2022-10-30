@@ -2,6 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+<<<<<<< HEAD
   before_action :user_state, only: [:create]
   
   def guest_sign_in
@@ -9,6 +10,8 @@ class Users::SessionsController < Devise::SessionsController
     sign_in user
     redirect_to root_path, flash: {guest_success: "ゲストユーザーとしてログインしました"}
   end
+=======
+>>>>>>> main
 
   # GET /resource/sign_in
   # def new

@@ -1,4 +1,5 @@
 class Users::HomesController < ApplicationController
+<<<<<<< HEAD
   def top
     @user = User.find(current_user.id)
     @followings = @user.followings
@@ -11,4 +12,12 @@ class Users::HomesController < ApplicationController
   end
 
 
+=======
+  
+  def top
+  end
+  
+  def about
+  end
+>>>>>>> main
 end

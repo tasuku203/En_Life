@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+
 # userと同様にskip: :[password, :registratin]を記述していたのだがするとNo method error Admin#sessionというエラーがでてしまい調べたところ
 # skip の記述を消せば解決するとあったのでその通りにするとエラー解決
+
   devise_for :admin, controllers: {
     sessions: "admins/sessions"
   }
@@ -29,7 +31,7 @@ Rails.application.routes.draw do
        get :like
        get :following
        get :follower
-      
+
      end
      collection do
       get :search
@@ -63,15 +65,16 @@ Rails.application.routes.draw do
     get :following
     get :follower
    end
-    
+
    collection do
     get :search
    end
- end
+  end
   resources :posts, only: %i[index show destroy] do
    collection do
     get :search
    end
   end
  end
+
 end
