@@ -44,11 +44,11 @@ class Users::UsersController < ApplicationController
     @users = @user.followers
   end
 
-  def search
-    @users = User.search(params[:keyword])
-    @keyword = params[:keyword]
-    render "index"
-  end
+  # def search
+  #   @users = User.search(params[:keyword])
+  #   @keyword = params[:keyword]
+  #   render "index"
+  # end
 
 
   private

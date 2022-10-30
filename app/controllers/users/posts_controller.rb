@@ -53,12 +53,12 @@ class Users::PostsController < ApplicationController
 
 
 
-  def search
-    @posts = Post.search(params[:keyword]).page(params[:page]).per(5)
-    @keyword = params[:keyword]
-    render "index"
+  # def search
+  #   @posts = Post.search(params[:keyword]).page(params[:page]).per(5)
+  #   @keyword = params[:keyword]
+  #   render "index"
 
-  end
+  # end
 
   private
 

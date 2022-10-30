@@ -28,7 +28,7 @@
     <% if current_user.following?(@user)%>
       <%= form_with model:@relationship, url:relationship_path, method: :delete, local: true do |f| %>
         <%= f.hidden_field :followed_id, value: @user.id %>
-        <%= f.submit "フォローを外す" %>
+        <%= f.submit "フォロー中", class:"btn btn-success" %>
       <% end %>
     <% else %>
       <%= form_with model:@set_relationship, url:relationships_path, method: :post, local:true do |f|%>
