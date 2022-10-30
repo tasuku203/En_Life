@@ -9,8 +9,8 @@ gem 'rails', '~> 6.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
- #gem 'puma', '~> 5.0'
-gem 'puma'
+gem 'puma', '~> 5.0'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
@@ -82,8 +82,8 @@ group :production do
   gem 'mysql2'
 end
 
-gem "net-smtp"
-gem "net-pop"
-gem "net-imap"
+# gem "net-smtp"
+# gem "net-pop"
+# gem "net-imap"
 
 
