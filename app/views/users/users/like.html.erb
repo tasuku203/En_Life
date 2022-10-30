@@ -1,0 +1,9 @@
+<div class="container px-4 px-sm-0">
+  <div class="row">
+    <%= render 'users/users/list', user:@user %>
+    <div class="col-md-8">
+      <h2>いいねした投稿</h2>
+      <%= render 'users/posts/list', posts:@like_posts %>
+    </div>
+  </div>
+</div>

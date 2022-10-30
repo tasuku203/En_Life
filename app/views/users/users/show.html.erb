@@ -1,0 +1,71 @@
+
+<div class="container">
+  <% if current_user == @user %>
+  <h3>マイページ</h3>
+  <% end %>
+  <div class="row justify-content-center">
+    <p>
+    <%= attachment_image_tag @user, :profile_image, :fill, 500, 500, fallback:"images/no_image.jpg",size:'200x200', class:"rounded-circle"; %>
+    </p>
+  </div>
+  <div class="row justify-content-center">
+    <h4><%= @user.name %></h4>
+  </div>
+  <div class="row justify-content-center">
+    <p><%= @user.profile %></p>
+  </div>
+  <!--マイページの時のみプロフィール編集できるようにする-->
+    <!--@user.id == current_user ではリンクが作成されなかった。.idはいれてはいけないようだ-->
+  <% if current_user == @user %>
+  <div class="row justify-content-center">
+    <a class="btn btn-outline-secondary col-4 mx-auto" href="/users/<%= current_user.id %>/edit">
+      <i class="fas fa-user-cog"></i>
+    </a>
+  </div>
+  <% elsif %>
+  <!--フォローボタン作成-->
+  <div class="row justify-content-center">
+    <% if current_user.following?(@user)%>
+      <%= form_with model:@relationship, url:relationship_path, method: :delete, local: true do |f| %>
+        <%= f.hidden_field :followed_id, value: @user.id %>
+        <%= f.submit "フォロー中", class:"btn btn-success" %>
+      <% end %>
+    <% else %>
+      <%= form_with model:@set_relationship, url:relationships_path, method: :post, local:true do |f|%>
+        <%= f.hidden_field :followed_id, value: @user.id %>
+        <%= f.submit "フォローする" %>
+      <% end %>
+    <% end %>
+  </div>
+  <% end %>
+  <!--下半分-->
+  <div class="row my-5 d-flex justify-content-center">
+    <div class="col-3 d-flex justify-content-center">
+      <p><h5><%= link_to "すべての投稿",index_user_post_path(@user.id), class:"text-dark" %></h5></p>
+      <span><%= @user.posts.count %></span>
+    </div>
+    <div class="col-3 d-flex justify-content-center">
+      <h5><%= link_to "いいねした投稿", like_user_path(@user.id), class:"text-dark" %></h5>
+      <%= @user.likes.count %>
+    </div>
+  </div>
+  
+  <div class="row mb-5 d-flex justify-content-center">
+    <div class="col-3 d-flex justify-content-center">
+      <p><h5><%= link_to "following", following_user_path(@user.id), class:"text-dark" %></h5></p>
+      <span><%= @user.followings.count %></span>
+    </div>
+    <div class="col-3 d-flex justify-content-center">
+      <h5><%= link_to "follower", follower_user_path(@user.id), class:"text-dark" %></h5>
+      <%= @user.followers.count %>
+    </div>
+  </div>
+  <% if current_user == @user %>
+  <div class="row justify-content-center">
+    <%= link_to "退会する", confirm_user_path(current_user), class:"text-secondary" %>
+  </div>
+  <% end %>
+</div>
+
+
+

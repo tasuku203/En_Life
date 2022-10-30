@@ -1,6 +1,6 @@
 require "test_helper"
 
-class InstallTest < ActiveSupport::TestCase
+class Admins::PostsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

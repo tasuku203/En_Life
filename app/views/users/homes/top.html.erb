@@ -1,1 +1,22 @@
+<<<<<<< HEAD
+<%= flash[:guest_success] %>
+
+<div class= "container" >
+  <div class= "row mx-auto">
+    <div class= "col">
+      <h1>タイムライン</h1>
+    </div>
+  </div>
+  <div class="row">
+    <% if current_user.followings.count == 0 %>
+      <%= render 'users/posts/list', posts:@posts_all %>
+    <% else %>
+      <%= render 'users/posts/list', posts:@posts %>
+    <% end %>
+  </div>
+</div>
+
+
+=======
 <h1>タイムラインページ</h1>
+>>>>>>> main

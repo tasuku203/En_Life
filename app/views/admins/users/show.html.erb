@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <h2><%= @user.name %>の詳細</h2>
+  </div>
+  <div class="row justify-content-center">
+    <p>
+    <%= attachment_image_tag @user, :profile_image, :fill, 500, 500, fallback:"images/no_image.jpg",size:'200x200', class:"rounded-circle"; %>
+    </p>
+  </div>
+  <div class="row justify-content-center">
+    <h4><%= @user.name %></h4>
+  </div>
+  <div class="row justify-content-center">
+    <p><%= @user.profile %></p>
+  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-3 d-flex justify-content-center flex-column">
+      <p class="mb-0 d-flex justify-content-center"><%= @user.followers.count %></p>
+      <h5 class="d-flex justify-content-center"><%= link_to "フォロワー", follower_admins_user_path(@user) %></h5>
+    </div>
+    <div class="col-3 d-flex justify-conten-center flex-column">
+      <p class="mb-0 d-flex justify-content-center"><%= @user.followings.count %></p>
+      <h5 class="d-flex justify-content-center"><%= link_to "フォロー", following_admins_user_path(@user) %></h5>
+    </div>
+  </div>
+  <div class="row d-flex flex-column">
+      <p class="d-flex justify-content-center"><%= @user.posts.count %></p>
+      <h5 class="d-flex justify-content-center"><%= link_to "すべての投稿",index_user_post_path(@user.id) %></h5>
+  </div>
+  
+  <div class="row justify-content-center">
+    <%= form_with model:@user, url: admins_user_path(@user),method: :patch , local: true do |f| %>
+      <%= f.radio_button :is_active, true %>
+      <%= f.label :is_active , "有効" %>
+      <%= f.radio_button :is_active, false %>
+      <%= f.label :is_active , "無効" %>
+      <%= f.submit "更新", class: "btn btn-success"%>
+    <% end %>
+  </div>
+  </div>

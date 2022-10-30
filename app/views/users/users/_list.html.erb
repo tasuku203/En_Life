@@ -1,0 +1,31 @@
+<!--ユーザー情報表示の部分テンプレート-->
+<!--users/posts/index_user-->
+<!--users/users/like-->
+<!---->
+<div class="col-3 mt-3 d-flex flex-column ">
+  <!--プロフィール画像-->
+  <%= link_to user_path(user) do %>
+  <div class="d-flex justify-content-center">
+    <%= attachment_image_tag user, :profile_image, :fill, 150, 150, fallback:"images/no_image.jpg", class:"rounded-circle";                      %>
+  </div>
+  <!--ユーザーネーム-->
+  <div class="d-flex justify-content-center">
+    <h4><%= user.name %></h4>
+  </div>
+  <% end %>
+  <!--follow,follower表示-->
+  <div class="d-flex">
+    <span class="flex-fill"><p class="d-flex justify-content-center">フォロー<%= user.followings.count %></p></span>
+    <span class="flex-fill"><p class="d-flex justify-content-center">フォロワー<%= user.followers.count %></p</span>
+  </div>
+  
+  
+  <!--ログインユーザーのときだけ編集アイコン表示-->
+  <% if current_user == user %>
+  <div class="row">
+    <a class="btn btn-outline-secondary col-5" href="/users/<%= current_user.id %>/edit">
+      <i class="fas fa-user-cog"></i>
+    </a>
+  </div>
+  <% end %>
+</div>
