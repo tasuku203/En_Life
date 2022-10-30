@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%= flash[:guest_success] %>
 
 <div class= "container" >
@@ -8,15 +7,12 @@
     </div>
   </div>
   <div class="row">
-    <% if current_user.followings.count == 0 %>
-      <%= render 'users/posts/list', posts:@posts_all %>
-    <% else %>
-      <%= render 'users/posts/list', posts:@posts %>
-    <% end %>
+    <%# if current_user.followings.count == 0 %>
+      <%# render 'users/posts/list', posts:@posts_all %>
+    <%# else %>
+      <%# render 'users/posts/list', posts:@posts %>
+    <%# end %>
   </div>
 </div>
 
 
-=======
-<h1>タイムラインページ</h1>
->>>>>>> main
