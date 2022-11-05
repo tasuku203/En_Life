@@ -83,13 +83,11 @@ group :production do
 end
 
 
-gem 'net-smtp', require: false
-gem 'net-imap', require: false
-gem 'net-pop', require: false
+# gem 'net-smtp', require: false
+# gem 'net-imap', require: false
+# gem 'net-pop', require: false
 
 
-# gem "net-smtp"
-# gem "net-pop"
-#gem "net-imap"
+
 
 

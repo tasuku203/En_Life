@@ -4,8 +4,8 @@
     <div class="d-flex justify-content-center">
       <%= form_with model:@post, local:true do |f|%>
         <div class="form-group">
-          <%= f.label :"写真を選択"%>
-          <%= f.attachment_field :post_image %>
+          <%= f.label :"写真を選択" %>
+          <%# f.attachment_field :post_image %>
         </div>
         <div class="form_group">
           <%= f.label  "タイトル"%>
