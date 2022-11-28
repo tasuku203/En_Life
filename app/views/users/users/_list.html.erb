@@ -22,7 +22,7 @@
   
   <!--ログインユーザーのときだけ編集アイコン表示-->
   <% if current_user == user %>
-  <div class="row">
+  <div class="row d-flex justify-content-center">
     <a class="btn btn-outline-secondary col-5" href="/users/<%= current_user.id %>/edit">
       <i class="fas fa-user-cog"></i>
     </a>

@@ -2,14 +2,14 @@
   <div class="row">
     <h2>プロフィール編集ページ</h2>
   </div>
-  
+
   <div class="row justify-content-center">
     <p>
-    <%= attachment_image_tag @user, :profile_image, :fill, 500, 500, fallback:"images/no_image.jpg",size:'200x200', class:"rounded-circle"; %>
+    <%= attachment_image_tag @user, :profile_image, :fill, 1000, 1000, fallback:"images/no_image.jpg",size:'200x200', class:"rounded-circle"; %>
     </p>
   </div>
-  
-  
+
+
   <div class="row justify-content-center">
     <%= form_with model:@user, url:user_path(@user.id), local: true do |f| %>
     <div class="form-group">
@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
        <%= f.label :プロフィール画像, class: "form_label" %>
-       <%= attachment_image_tag @user, :profile_image, :fill, 100, 100%>
+       <%= attachment_image_tag @user, :profile_image, :fill, 1000, 1000%>
        <%= f.attachment_field :profile_image %>
     </div>
     <div>

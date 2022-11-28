@@ -4,11 +4,13 @@
     <!--部分テンプレート呼び出し-->
     <%= render 'users/users/list', user:@user %>
     <!--メイン-->
-    <div class="col-md-8 d-flex flex-column">
+    <div class="col-9 d-flex flex-column">
       <%= flash[:notice] %>
       <h2><%= @user.name %>のすべての投稿</h2>
+        <div class="row">
+          <%= render 'users/posts/list', posts:@posts %>
+        </div>
       <!--部分テンプレート呼び出し-->
-      <%= render 'users/posts/list', posts:@posts %>
     </div>
   </div>
 </div>
